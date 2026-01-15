@@ -1,0 +1,61 @@
+You are given a 3×3 matrix of positive integers.
+Starting from value 1, then 2, then 3, and so on, perform the following operation:
+
+Find the cell containing the current value.
+
+Decrease all its adjacent elements (up, down, left, right) by 1.
+
+Continue this process for increasing values until all elements in the matrix become 0.
+
+❗ If at any step an adjacent element becomes negative, the process is not possible.
+
+✅ Goal
+
+Determine whether it is possible to reduce the entire matrix to zeros by following the above rules.
+
+
+answer
+def reduce_matrix(mat):
+    n = 3
+
+    # find maximum value in matrix
+    max_val = 0
+    for row in mat:
+        for x in row:
+            if x > max_val:
+                max_val = x
+
+    # process values from 1 to max_val
+    for k in range(1, max_val + 1):
+        for i in range(n):
+            for j in range(n):
+                if mat[i][j] == k:
+
+                    # check all 4 directions
+                    if i > 0:
+                        if mat[i-1][j] == 0:
+                            return "NOT POSSIBLE"
+                        mat[i-1][j] -= 1
+
+                    if i < n-1:
+                        if mat[i+1][j] == 0:
+                            return "NOT POSSIBLE"
+                        mat[i+1][j] -= 1
+
+                    if j > 0:
+                        if mat[i][j-1] == 0:
+                            return "NOT POSSIBLE"
+                        mat[i][j-1] -= 1
+
+                    if j < n-1:
+                        if mat[i][j+1] == 0:
+                            return "NOT POSSIBLE"
+                        mat[i][j+1] -= 1
+
+    # check if all elements are zero
+    for row in mat:
+        for x in row:
+            if x != 0:
+                return "NOT POSSIBLE"
+
+    return "POSSIBLE"
