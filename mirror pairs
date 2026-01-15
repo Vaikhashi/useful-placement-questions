@@ -1,0 +1,35 @@
+🔹 Question 1 – Mirror Pairs
+Problem statement (simplified)
+
+You are given an array of integers.
+
+A pair (i, j) is called a mirror pair if:
+
+i < j
+
+A[i] = reverse(A[j])
+
+👉 reverse(123) = 321
+
+Task
+
+Count the total number of mirror pairs.
+
+def count_mirror_pairs(arr):
+    freq = {}
+    count = 0
+
+    for num in arr:
+        rev = int(str(num)[::-1])
+        if rev in freq:
+            count += freq[rev]
+
+        freq[num] = freq.get(num, 0) + 1
+
+    return count
+
+
+# Input
+arr = [12, 21, 30, 3, 45, 54]
+print(count_mirror_pairs(arr))
+
