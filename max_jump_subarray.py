@@ -1,0 +1,22 @@
+# Longest run where the difference between neighbours stays the same.
+
+arr = [1, 3, 5, 7, 9]
+
+
+max_len = 1
+curr_len = 1
+prev_diff = None
+
+for i in range(1, len(arr)):
+    diff = arr[i] - arr[i-1]
+
+    if diff == prev_diff:
+        curr_len += 1
+    else:
+        curr_len = 2
+
+    prev_diff = diff  # always update
+    max_len = max(max_len, curr_len)
+
+print(max_len)
+
